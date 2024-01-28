@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Meal Page</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row" id="mealList">
+      <!-- Card template here -->
+    </div>
+  </div>
+
+  <template id="mealCardTemplate">
+    <div class="col-md-3">
+      <div class="card mb-4 box-shadow meal-card" data-meal-id="">
+        <img class="card-img-top meal-image" alt="" title="">
+        <div class="card-body">
+          <p class="card-text meal-name"></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <script src="script1.js"></script>
+</body>
+
+</html>

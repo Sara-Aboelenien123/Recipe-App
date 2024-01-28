@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="search.css">
+</head>
+
+<body class="bg-black">
+
+    <div class="container w-75 mt-4">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <input id="nameSearch" class="form-control bg-transparent text-white placeholder-gray" type="text"
+                    placeholder="Search by name">
+            </div>
+
+            <div class="col-md-6">
+                <input id="letterSearch" class="form-control bg-transparent text-white placeholder-gray" type="text"
+                    placeholder="Search by first letter" maxlength="1">
+            </div>
+        </div>
+
+        <div id="recipeList" class="row">
+            <!-- Search results will be displayed here -->
+        </div>
+    </div>
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="search.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to fetch data from the API based on name
+            function searchByName(name) {
+                $.ajax({
+                    url: 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + name,
+                    method: 'GET',
+                    success: function (data) {
+                        displayResults(data.meals);
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+
+            // Function to fetch data from the API based on first letter
+            function searchByFirstLetter(letter) {
+                $.ajax({
+                    url: 'https://www.themealdb.com/api/json/v1/1/search.php?f=' + letter,
+                    method: 'GET',
+                    success: function (data) {
+                        displayResults(data.meals);
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+
+            function displayResults(meals) {
+                $('#recipeList').empty();
+
+                // If there are meals, display them
+                if (meals) {
+                    meals.forEach(function (meal) {
+                        var imgSrc = meal.strMealThumb;
+                        var name = meal.strMeal;
+
+                        var imageElement = '<img id="mealImage_' + meal.idMeal + '" src="' + imgSrc + '" alt="' + name + '" class="img-fluid">';
+                        var nameElement = '<p class="text-white">' + name + '</p>';
+
+                        var resultDiv = '<div class="col-md-4 mb-4">' + imageElement + nameElement + '</div>';
+
+                        $('#recipeList').append(resultDiv);
+
+                        $('#mealImage_' + meal.idMeal).on('click', function () {
+                            const selectedMealId = encodeURIComponent(meal.idMeal);
+                            window.location.href = `Area/page2.html?id=${selectedMealId}`;
+                        });
+                    });
+                } else {
+                    $('#recipeList').html('<p>No results found.</p>');
+                }
+            }
+
+            $('#nameSearch').on('input', function () {
+                var name = $(this).val();
+                searchByName(name);
+            });
+
+            $('#letterSearch').on('input', function () {
+                var letter = $(this).val();
+                if (letter.length === 1) {
+                    searchByFirstLetter(letter);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

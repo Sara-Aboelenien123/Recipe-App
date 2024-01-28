@@ -1,0 +1,110 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <link rel="stylesheet" href="../Contact us/bootstrap.min.css">
+    <link rel="stylesheet" href="contactus.css">
+</head>
+
+<body class="bg-black">
+    <div class="container">
+        <div id="rowData" class="row py-5 g-4">
+            <div class="contacts min-vh-100 d-flex justify-content-center align-items-center">
+                <div class="container w-75 text-center">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <input id="nameInput" class="form-control" onkeyup="inputsValidation()" type="text"
+                                placeholder="Enter your name">
+                        </div>
+                        <div class="col-md-6">
+                            <input id="emailInput" class="form-control" onkeyup="inputsValidation()" type="email"
+                                placeholder="Enter your email">
+                        </div>
+                        <div class="col-md-6">
+                            <input id="phoneInput" class="form-control" onkeyup="inputsValidation()" type="text"
+                                placeholder="Enter your phone">
+                        </div>
+                        <div class="col-md-6">
+                            <input id="ageInput" class="form-control" onkeyup="inputsValidation()" type="number"
+                                placeholder="Enter your age">
+                        </div>
+                        <div class="col-md-6">
+                            <input id="passWordInput" class="form-control" onkeyup="inputsValidation()" type="password"
+                                placeholder="Enter your password">
+                        </div>
+                        <div class="col-md-6">
+                            <input id="repassWordInput" class="form-control" onkeyup="inputsValidation()"
+                                type="password" placeholder="Enter your password again">
+                        </div>
+                        <button id="SubmitBtn" class="btn btn-outline-danger px-2 mt-3 " disabled="">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form </title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Registration Form</h3>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" placeholder="Enter Your Name" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" class="form-control" placeholder="Enter Your Age" id="age" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control"placeholder="Enter Your Email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="text" class="form-control"placeholder="Enter Your Phone" id="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control"placeholder="Enter Your Password" id="password" required>
+            </div>
+            <div class="form-group">
+              <label for="repassword">Confirm Password:</label>
+              <input type="password" class="form-control"placeholder="Enter Your Password Again" id="repassword" required>
+            </div>
+            <button type="submit" class="btn btn-dark" id="submit" disabled>Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

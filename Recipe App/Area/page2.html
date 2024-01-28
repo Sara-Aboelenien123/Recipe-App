@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style2.css">
+
+
+
+</style>
+
+</head>
+<body class="bg-dark">
+  <div class="container">
+    <div id="mealDetails" class="row mt-5"></div>
+  </div>
+
+  <template id="mealDetailsTemplate">
+    <div class="col-md-6 mx-auto">
+      <div class="card mb-3">
+        <img class="card-img-top meal-image" alt="" title="">
+        <div class="card-body">
+          <h2 class="card-title meal-name"></h2>
+          <p class="card-text meal-tags "></p>
+          <p class="card-text meal-category"></p>
+          <p class="card-text meal-area"></p>
+          <p class="card-text meal-instructions "></p>
+          <a class="btn btn-primary meal-source">Sourse </a>
+          <a class="btn btn-danger meal-youtube-link" target="_blank"> YouTube</a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    const mealId = getParameterByName('id');
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+      .then(response => response.json())
+      .then(data => {
+        const mealDetailsContainer = document.getElementById('mealDetails');
+        const meal = data.meals[0];
+
+        const template = document.getElementById('mealDetailsTemplate');
+        const clone = document.importNode(template.content, true);
+
+        const mealImage = clone.querySelector('.meal-image');
+        const mealName = clone.querySelector('.meal-name');
+        const tags = clone.querySelector('.meal-tags');
+        const category = clone.querySelector('.meal-category');
+        const area = clone.querySelector('.meal-area');
+        const instructions = clone.querySelector('.meal-instructions');
+        const source = clone.querySelector('.meal-source');
+        const youtubeLink = clone.querySelector('.meal-youtube-link');
+
+        mealImage.src = meal.strMealThumb;
+        mealImage.alt = meal.strMeal;
+        mealImage.title = meal.strMeal;
+        mealName.textContent = meal.strMeal;
+        tags.textContent =` Tags: ${meal.strTags || 'N/A'}`;
+        category.textContent = `Category: ${meal.strCategory || 'N/A'}`;
+        area.textContent = `Area: ${meal.strArea || 'N/A'}`;
+        instructions.textContent = `Instructions: ${meal.strInstructions || 'N/A'}`;
+source.href = meal.strSorce;
+        youtubeLink.href = meal.strYoutube;
+
+        mealDetailsContainer.appendChild(clone);
+      })
+      .catch(error => console.error('Error fetching meal details:', error));
+  </script>
+</body>
+</html>

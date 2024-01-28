@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/92d70a2fd8.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .ingredient-container {
+            margin-bottom: 20px;
+            height: 207px; 
+            width: 200px; 
+            overflow: hidden; 
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="main">
+            <!-- Ingredients will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        function getIngredientsMeals() {
+            fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list")
+                .then(response => response.json())
+                .then(data => {
+                    const mainDiv = document.getElementById('main');
+
+                    data.meals.forEach(ingredient => {
+                        const ingredientDiv = document.createElement('div');
+                        ingredientDiv.classList.add('col-md-3', 'ingredient-container'); 
+
+                        const icon = document.createElement('i');
+                        icon.classList.add('fa-solid', 'fa-drumstick-bite', 'fa-4x', 'text-white');
+
+                        const ingredientName = document.createElement('h3');
+                        ingredientName.classList.add('text-white');
+
+                        ingredientName.textContent = ingredient.strIngredient;
+
+                        const ingredientDescription = document.createElement('p');
+                        ingredientDescription.classList.add('text-white');
+                        ingredientDescription.textContent = ingredient.strDescription;
+
+                        ingredientDiv.appendChild(icon);
+                        ingredientDiv.appendChild(ingredientName);
+                        ingredientDiv.appendChild(ingredientDescription);
+
+                        ingredientDiv.addEventListener('click', function () {
+                            const selectedIngredient = encodeURIComponent(ingredient.strIngredient);
+                            window.location.href = `page1.html?ingredient=${selectedIngredient}`;
+                        });
+
+                        mainDiv.appendChild(ingredientDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('main').textContent = 'Error fetching data';
+                });
+        }
+
+        getIngredientsMeals();
+    </script>
+</body>
+
+</html>
